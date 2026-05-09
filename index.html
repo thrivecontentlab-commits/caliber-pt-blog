@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insights — Caliber PT</title>
+  <meta name="description" content="Expert perspectives on orthopedic physical therapy, surgical recovery, performance, and life in motion. From the clinical team at Caliber PT." />
+  <meta property="og:title" content="Insights — Caliber PT" />
+  <meta property="og:description" content="Expert perspectives from the Caliber PT clinical team." />
+  <meta property="og:url" content="https://insights.caliberpt.co" />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:    #0A0A0A;
+      --surface:  #141414;
+      --surface2: #1C1C1C;
+      --cream:    #F0EAE0;
+      --cream-65: rgba(240,234,224,0.65);
+      --cream-45: rgba(240,234,224,0.45);
+      --gold:     #B8936A;
+      --gold-lt:  #D4AC82;
+      --border:   rgba(240,234,224,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--black); scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: rgba(184,147,106,0.3); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 80px;
+      display: flex; align-items: center;
+      background: rgba(10,10,10,0.97);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .navbar-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 40px;
+      width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .navbar a { text-decoration: none; }
+    .nav-logo img { height: 52px; width: auto; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-link {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(240,234,224,0.6);
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover { color: var(--cream); }
+    .nav-cta {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      border: 1px solid var(--gold); padding: 10px 22px;
+      transition: all 0.3s ease;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+    /* ── HEADER ── */
+    .page-header {
+      padding: 160px 40px 80px;
+      border-bottom: 1px solid rgba(240,234,224,0.06);
+      max-width: 1200px; margin: 0 auto;
+    }
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 16px; display: block;
+    }
+    .gold-line {
+      height: 1px; width: 48px; background: var(--gold);
+      margin-bottom: 32px;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 300; line-height: 1.05;
+      color: var(--cream); max-width: 600px;
+    }
+    .page-title em { font-style: italic; color: rgba(240,234,224,0.45); }
+    .page-subtitle {
+      margin-top: 24px;
+      font-size: 15px; line-height: 1.9; font-weight: 300;
+      color: var(--cream-65); max-width: 480px;
+    }
+
+    /* ── POST GRID ── */
+    .posts-section {
+      max-width: 1200px; margin: 0 auto;
+      padding: 80px 40px 120px;
+    }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1px;
+      border: 1px solid rgba(240,234,224,0.08);
+    }
+    .post-card {
+      background: var(--surface2);
+      border: none;
+      padding: 40px;
+      display: flex; flex-direction: column; gap: 16px;
+      text-decoration: none;
+      transition: background 0.3s ease, border-color 0.3s ease;
+      outline: 1px solid rgba(240,234,224,0.08);
+      position: relative;
+    }
+    .post-card:hover { background: rgba(184,147,106,0.06); outline-color: rgba(184,147,106,0.35); }
+    .post-card:hover .post-arrow { color: var(--gold); }
+
+    .post-date {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .post-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2vw, 26px);
+      font-weight: 400; line-height: 1.25;
+      color: var(--cream);
+    }
+    .post-excerpt {
+      font-size: 13px; line-height: 1.8; font-weight: 300;
+      color: var(--cream-65); flex: 1;
+    }
+    .post-arrow {
+      font-size: 18px; color: rgba(240,234,224,0.25);
+      transition: color 0.3s ease; align-self: flex-end;
+      margin-top: 8px;
+    }
+
+    /* Loading / empty states */
+    .state-msg {
+      text-align: center; padding: 80px 40px;
+      color: var(--cream-45); font-size: 14px; font-weight: 300;
+    }
+    .state-msg .font-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px; font-weight: 300;
+      color: rgba(240,234,224,0.6); display: block; margin-bottom: 16px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 60px 0 40px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 40px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 40px; margin-bottom: 48px;
+    }
+    .footer-logo img { height: 44px; width: auto; margin-bottom: 16px; }
+    .footer-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      color: rgba(240,234,224,0.45); text-decoration: none;
+      font-size: 13px; font-weight: 300; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-desc { color: rgba(240,234,224,0.4); font-size: 13px; line-height: 1.8; font-weight: 300; }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto; padding: 24px 40px 0;
+      border-top: 1px solid rgba(240,234,224,0.06);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p, .footer-bottom a {
+      color: rgba(240,234,224,0.3); font-size: 11px; font-weight: 300; text-decoration: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .page-header { padding: 120px 24px 60px; }
+      .posts-section { padding: 60px 24px 80px; }
+      .footer-inner { padding: 0 24px; }
+      .footer-bottom { padding: 24px 24px 0; }
+      .posts-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Focus */
+    a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="https://caliberpt.co" class="nav-logo" aria-label="Caliber PT — Home">
+        <img src="https://quiet-sundae-38ce4e.netlify.app/caliber_logo.svg" alt="Caliber PT" />
+      </a>
+      <div class="nav-links">
+        <a href="https://caliberpt.co/#/about" class="nav-link">About</a>
+        <a href="https://caliberpt.co/#/services" class="nav-link">Services</a>
+        <a href="https://caliberpt.co/#/faq" class="nav-link">FAQ</a>
+        <a href="https://caliberpt.co/#/contact" class="nav-cta">Reserve Consultation</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header style="background: var(--black); border-bottom: 1px solid rgba(240,234,224,0.06);">
+    <div class="page-header">
+      <span class="eyebrow">Insights</span>
+      <div class="gold-line"></div>
+      <h1 class="page-title">
+        Clinical perspectives.<br />
+        <em>Straight from the source.</em>
+      </h1>
+      <p class="page-subtitle">
+        Expert takes on surgical recovery, performance, injury prevention,
+        and what evidence-based physical therapy actually looks like.
+      </p>
+    </div>
+  </header>
+
+  <!-- POSTS -->
+  <main id="main-content">
+    <section class="posts-section" aria-label="Blog posts">
+      <div id="posts-container">
+        <div class="state-msg">
+          <span class="font-display">Loading</span>
+          <p>Retrieving posts…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">
+          <img src="https://quiet-sundae-38ce4e.netlify.app/caliber_logo.svg" alt="Caliber PT" />
+        </div>
+        <p class="footer-desc">Manhattan's premier concierge orthopedic physical therapy practice.</p>
+      </div>
+      <div>
+        <span class="footer-label">Navigate</span>
+        <div class="footer-links">
+          <a href="https://caliberpt.co">Main Site</a>
+          <a href="https://caliberpt.co/#/about">About</a>
+          <a href="https://caliberpt.co/#/services">Services</a>
+          <a href="https://caliberpt.co/#/faq">FAQ</a>
+          <a href="https://caliberpt.co/#/contact">Get Started</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-label">Contact</span>
+        <div class="footer-links">
+          <a href="tel:+16466687210">646.668.7210</a>
+          <a href="mailto:hello@caliberpt.co">hello@caliberpt.co</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="yr"></span> Caliber PT PLLC. All rights reserved.</p>
+      <a href="https://caliberpt.co/#/privacy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script>
+    // Set year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Format Unix timestamp to readable date
+    function formatDate(ts) {
+      const d = new Date(typeof ts === 'number' && ts < 1e12 ? ts * 1000 : ts);
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    // Render posts
+    async function loadPosts() {
+      const container = document.getElementById('posts-container');
+      try {
+        const res = await fetch('./posts.json?v=' + Date.now());
+        if (!res.ok) throw new Error('not found');
+        const posts = await res.json();
+
+        if (!posts || posts.length === 0) {
+          container.innerHTML = `
+            <div class="state-msg">
+              <span class="font-display">Coming soon.</span>
+              <p>Our first posts are on the way.</p>
+            </div>`;
+          return;
+        }
+
+        // Sort newest first
+        const sorted = [...posts].sort((a, b) => b.publishTime - a.publishTime);
+
+        container.innerHTML = `<div class="posts-grid">` +
+          sorted.map(p => `
+            <a href="./posts/${p.slug}.html" class="post-card">
+              <span class="post-date">${formatDate(p.publishTime)}</span>
+              <h2 class="post-title">${p.title}</h2>
+              <p class="post-excerpt">${p.excerpt || ''}</p>
+              <span class="post-arrow" aria-hidden="true">→</span>
+            </a>
+          `).join('') +
+        `</div>`;
+      } catch {
+        container.innerHTML = `
+          <div class="state-msg">
+            <span class="font-display">Coming soon.</span>
+            <p>Our first posts are on the way.</p>
+          </div>`;
+      }
+    }
+
+    loadPosts();
+  </script>
+</body>
+</html>
