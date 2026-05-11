@@ -1,337 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Insights — Caliber PT</title>
-  <meta name="description" content="Expert perspectives on orthopedic physical therapy, surgical recovery, performance, and life in motion. From the clinical team at Caliber PT." />
-  <meta property="og:title" content="Insights — Caliber PT" />
-  <meta property="og:description" content="Expert perspectives from the Caliber PT clinical team." />
-  <meta property="og:url" content="https://insights.caliberpt.co" />
-  <meta property="og:type" content="website" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --black:    #0A0A0A;
-      --surface:  #141414;
-      --surface2: #1C1C1C;
-      --cream:    #F0EAE0;
-      --cream-65: rgba(240,234,224,0.65);
-      --cream-45: rgba(240,234,224,0.45);
-      --gold:     #B8936A;
-      --gold-lt:  #D4AC82;
-      --border:   rgba(240,234,224,0.10);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { background: var(--black); scroll-behavior: smooth; }
-
-    body {
-      background-color: var(--black);
-      color: var(--cream);
-      font-family: 'Jost', sans-serif;
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-    }
-
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 6px; background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: rgba(184,147,106,0.3); }
-    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
-
-    /* ── NAVBAR ── */
-    .navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: 80px;
-      display: flex; align-items: center;
-      background: rgba(10,10,10,0.97);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(12px);
-    }
-    .navbar-inner {
-      max-width: 1200px; margin: 0 auto; padding: 0 40px;
-      width: 100%;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .navbar a { text-decoration: none; }
-    .nav-logo img { height: 52px; width: auto; display: block; }
-    .nav-links { display: flex; align-items: center; gap: 36px; }
-    .nav-link {
-      font-family: 'Jost', sans-serif;
-      font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
-      text-transform: uppercase; color: rgba(240,234,224,0.6);
-      transition: color 0.2s ease;
-    }
-    .nav-link:hover { color: var(--cream); }
-    .nav-cta {
-      font-family: 'Jost', sans-serif;
-      font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--gold);
-      border: 1px solid var(--gold); padding: 10px 22px;
-      transition: all 0.3s ease;
-    }
-    .nav-cta:hover { background: var(--gold); color: var(--black); }
-
-    /* ── HEADER ── */
-    .page-header {
-      padding: 160px 40px 80px;
-      border-bottom: 1px solid rgba(240,234,224,0.06);
-      max-width: 1200px; margin: 0 auto;
-    }
-    .eyebrow {
-      font-family: 'Jost', sans-serif;
-      font-size: 10px; font-weight: 500; letter-spacing: 0.3em;
-      text-transform: uppercase; color: var(--gold);
-      margin-bottom: 16px; display: block;
-    }
-    .gold-line {
-      height: 1px; width: 48px; background: var(--gold);
-      margin-bottom: 32px;
-    }
-    .page-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(40px, 6vw, 72px);
-      font-weight: 300; line-height: 1.05;
-      color: var(--cream); max-width: 600px;
-    }
-    .page-title em { font-style: italic; color: rgba(240,234,224,0.45); }
-    .page-subtitle {
-      margin-top: 24px;
-      font-size: 15px; line-height: 1.9; font-weight: 300;
-      color: var(--cream-65); max-width: 480px;
-    }
-
-    /* ── POST GRID ── */
-    .posts-section {
-      max-width: 1200px; margin: 0 auto;
-      padding: 80px 40px 120px;
-    }
-    .posts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 1px;
-      border: 1px solid rgba(240,234,224,0.08);
-    }
-    .post-card {
-      background: var(--surface2);
-      border: none;
-      padding: 40px;
-      display: flex; flex-direction: column; gap: 16px;
-      text-decoration: none;
-      transition: background 0.3s ease, border-color 0.3s ease;
-      outline: 1px solid rgba(240,234,224,0.08);
-      position: relative;
-    }
-    .post-card:hover { background: rgba(184,147,106,0.06); outline-color: rgba(184,147,106,0.35); }
-    .post-card:hover .post-arrow { color: var(--gold); }
-
-    .post-date {
-      font-size: 10px; font-weight: 500; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--gold);
-    }
-    .post-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(20px, 2vw, 26px);
-      font-weight: 400; line-height: 1.25;
-      color: var(--cream);
-    }
-    .post-excerpt {
-      font-size: 13px; line-height: 1.8; font-weight: 300;
-      color: var(--cream-65); flex: 1;
-    }
-    .post-arrow {
-      font-size: 18px; color: rgba(240,234,224,0.25);
-      transition: color 0.3s ease; align-self: flex-end;
-      margin-top: 8px;
-    }
-
-    /* Loading / empty states */
-    .state-msg {
-      text-align: center; padding: 80px 40px;
-      color: var(--cream-45); font-size: 14px; font-weight: 300;
-    }
-    .state-msg .font-display {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px; font-weight: 300;
-      color: rgba(240,234,224,0.6); display: block; margin-bottom: 16px;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 60px 0 40px;
-    }
-    .footer-inner {
-      max-width: 1200px; margin: 0 auto; padding: 0 40px;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 40px; margin-bottom: 48px;
-    }
-    .footer-logo img { height: 44px; width: auto; margin-bottom: 16px; }
-    .footer-label {
-      font-size: 10px; font-weight: 500; letter-spacing: 0.3em;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block;
-    }
-    .footer-links { display: flex; flex-direction: column; gap: 10px; }
-    .footer-links a {
-      color: rgba(240,234,224,0.45); text-decoration: none;
-      font-size: 13px; font-weight: 300; transition: color 0.2s;
-    }
-    .footer-links a:hover { color: var(--cream); }
-    .footer-desc { color: rgba(240,234,224,0.4); font-size: 13px; line-height: 1.8; font-weight: 300; }
-    .footer-bottom {
-      max-width: 1200px; margin: 0 auto; padding: 24px 40px 0;
-      border-top: 1px solid rgba(240,234,224,0.06);
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-    }
-    .footer-bottom p, .footer-bottom a {
-      color: rgba(240,234,224,0.3); font-size: 11px; font-weight: 300; text-decoration: none;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .page-header { padding: 120px 24px 60px; }
-      .posts-section { padding: 60px 24px 80px; }
-      .footer-inner { padding: 0 24px; }
-      .footer-bottom { padding: 24px 24px 0; }
-      .posts-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Focus */
-    a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-  </style>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0A0A0A">
+  <title>Insights — Caliber PT | Concierge Physical Therapy Manhattan</title>
+  <meta name="description" content="Clinical perspectives on orthopedic recovery, performance, and what exceptional physical therapy actually looks like. From the team at Caliber PT, Manhattan's concierge PT practice.">
+  <link rel="canonical" href="https://insights.caliberpt.co">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Caliber PT — Insights">
+  <meta property="og:title" content="Insights — Caliber PT | Concierge Physical Therapy Manhattan">
+  <meta property="og:description" content="Clinical perspectives on orthopedic recovery, performance, and what exceptional physical therapy actually looks like.">
+  <meta property="og:url" content="https://insights.caliberpt.co">
+  <meta property="og:locale" content="en_US">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Caliber PT PLLC",
+  "description": "Concierge orthopedic physical therapy serving Manhattan, NYC. One-on-one sessions with Doctors of Physical Therapy.",
+  "url": "https://caliberpt.co",
+  "telephone": "646-668-7210",
+  "email": "hello@caliberpt.co",
+  "priceRange": "$$$",
+  "address": {"@type":"PostalAddress","addressLocality":"Manhattan","addressRegion":"NY","addressCountry":"US"},
+  "geo": {"@type":"GeoCoordinates","latitude":40.7831,"longitude":-73.9712},
+  "areaServed": {"@type":"City","name":"Manhattan"},
+  "sameAs": ["https://www.instagram.com/caliberptnyc/"]
+}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/_astro/_slug_.BFA1s-Ub.css">
+  <script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{window.scrollY>40?nav?.classList.add('scrolled'):nav?.classList.remove('scrolled')},{passive:true});
+const toggle=document.getElementById('nav-toggle'),links=document.getElementById('nav-links');
+toggle?.addEventListener('click',()=>{const o=links?.classList.toggle('open');toggle.setAttribute('aria-expanded',String(o))});
+document.querySelectorAll('.fade-up').forEach(el=>{new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add('visible')}},{threshold:.1,rootMargin:'0px 0px -40px 0px'}).observe(el)});
+</script>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="https://caliberpt.co" class="nav-logo" aria-label="Caliber PT — return to main site"><img src="caliber_logo.svg" alt="Caliber PT" style="height:52px;width:auto;display:block;"></a>
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="https://caliberpt.co/#/about">About</a></li>
+      <li><a href="https://caliberpt.co/#/services">Services</a></li>
+      <li><a href="https://caliberpt.co/#/faq">FAQ</a></li>
+      <li><a href="https://insights.caliberpt.co" class="active">Insights</a></li>
+      <li class="nav-cta-mobile-wrap"><a href="https://caliberpt.co/#/contact" class="nav-cta-mobile">Reserve Consultation</a></li>
+    </ul>
+    <a href="https://caliberpt.co/#/contact" class="nav-cta" aria-label="Reserve your consultation">Reserve Consultation</a>
+  </div>
+</nav>
+<main id="main-content">
 
-  <!-- NAVBAR -->
-  <nav class="navbar" aria-label="Main navigation">
-    <div class="navbar-inner">
-      <a href="https://caliberpt.co" class="nav-logo" aria-label="Caliber PT — Home">
-        <img src="https://quiet-sundae-38ce4e.netlify.app/caliber_logo.svg" alt="Caliber PT" />
-      </a>
-      <div class="nav-links">
-        <a href="https://caliberpt.co/#/about" class="nav-link">About</a>
-        <a href="https://caliberpt.co/#/services" class="nav-link">Services</a>
-        <a href="https://caliberpt.co/#/faq" class="nav-link">FAQ</a>
-        <a href="https://caliberpt.co/#/contact" class="nav-cta">Reserve Consultation</a>
+  <section class="hero" aria-label="Blog introduction">
+    <span class="eyebrow fade-up">Clinical Perspectives</span>
+    <h1 class="fade-up delay-1">
+      Insights on recovery,<br><em>performance, and the standard of care you deserve.</em>
+    </h1>
+    <p class="hero-sub fade-up delay-2">
+      Short essays from the Caliber PT team on orthopedic recovery, athletic performance,
+      and what exceptional physical therapy actually looks like.
+    </p>
+  </section>
+
+  <section class="posts-section" aria-label="All articles">
+    <div class="posts-grid" id="posts-grid">
+
+      <!-- FEATURED -->
+      <article class="post-card fade-up featured" style="transition-delay:0s">
+        <div class="post-number" aria-hidden="true">01</div>
+        <div class="post-content">
+          <div class="post-card-meta">
+            <span class="post-category">About Our Practice</span>
+            <span class="post-meta-dot" aria-hidden="true"></span>
+            <time class="post-date" datetime="2024-09-03">September 3, 2024</time>
+            <span class="post-meta-dot" aria-hidden="true"></span>
+            <span class="post-read-time">5 min read</span>
+          </div>
+          <h2><a href="/blog/concierge-pt-manhattan">Concierge Physical Therapy in Manhattan — What It Is and Who It's For</a></h2>
+          <p class="post-excerpt">Mobile, one-on-one physical therapy delivered to your home, office, or preferred gym. What concierge PT actually means, what a session looks like, and the specific situations where it changes outcomes.</p>
+          <a href="/blog/concierge-pt-manhattan" class="post-read-link" aria-label="Read: Concierge Physical Therapy in Manhattan">Read</a>
+        </div>
+      </article>
+
+      <!-- 4 STANDARD ARTICLES -->
+      <article class="post-card fade-up" style="transition-delay:0.1s">
+        <div class="post-content">
+          <div class="post-card-meta">
+            <span class="post-category">Perspective</span>
+            <span class="post-meta-dot" aria-hidden="true"></span>
+            <time class="post-date" datetime="2024-07-30">July 30, 2024</time>
+            <span class="post-meta-dot" aria-hidden="true"></span>
+            <span class="post-read-time">7 min read</span>
+          </div>
+          <h2><a href="/blog/true-cost-of-insurance-pt">The True Cost of Insurance-Based Physical Therapy</a></h2>
+          <p class="post-excerpt">When you calculate what recovery actually costs through insurance — in copays, time, suboptimal outcomes, and the real risk of re-injury — cash-pay physical therapy is often the more economical choice.</p>
+          <a href="/blog/true-cost-of-insurance-pt" class="post-read-link" aria-label="Read: The True Cost of Insurance-Based PT">Read</a>
+        </div>
+      </article>
+
+      <article class="post-card fade-up" style="transition-delay:0.2s">
+        <div class="post-content">
+          <div class="post-card-meta">
+            <span class="post-category">Performance</span>
+            <span class="post-meta-dot" aria-hidden="true"></span>
+            <time class="post-date" datetime="2024-06-18">June 18, 2024</time>
+            <span class="post-meta-dot" aria-hidden="true"></span>
+            <span class="post-read-time">6 min read</span>
+          </div>
+          <h2><a href="/blog/how-athletes-recover">How Professional Athletes Approach Injury Recovery</a></h2>
+          <p class="post-excerpt">A torn ACL sidelines most people for a year or more. The same injury keeps an NHL player off the ice for six months. The gap isn't biological — it's structural. Here's what elite recovery actually looks like.</p>
+          <a href="/blog/how-athletes-recover" class="post-read-link" aria-label="Read: How Professional Athletes Approach Injury Recovery">Read</a>
+        </div>
+      </article>
+
+      <article class="post-card fade-up" style="transition-delay:0.3s">
+        <div class="post-content">
+          <div class="post-card-meta">
+            <span class="post-category">Recovery</span>
+            <span class="post-meta-dot" aria-hidden="true"></span>
+            <time class="post-date" datetime="2024-05-20">May 20, 2024</time>
+            <span class="post-meta-dot" aria-hidden="true"></span>
+            <span class="post-read-time">6 min read</span>
+          </div>
+          <h2><a href="/blog/what-surgeons-expect">What Top NYC Surgeons Look for in a Physical Therapist</a></h2>
+          <p class="post-excerpt">After a complex orthopedic procedure, the surgeon's work represents roughly half the outcome. The other half is rehabilitation. The surgeons who understand this have very specific expectations.</p>
+          <a href="/blog/what-surgeons-expect" class="post-read-link" aria-label="Read: What Top NYC Surgeons Look for in a PT">Read</a>
+        </div>
+      </article>
+
+      <article class="post-card fade-up" style="transition-delay:0.4s">
+        <div class="post-content">
+          <div class="post-card-meta">
+            <span class="post-category">Perspective</span>
+            <span class="post-meta-dot" aria-hidden="true"></span>
+            <time class="post-date" datetime="2024-04-15">April 15, 2024</time>
+            <span class="post-meta-dot" aria-hidden="true"></span>
+            <span class="post-read-time">5 min read</span>
+          </div>
+          <h2><a href="/blog/assembly-line-pt">The Case Against Assembly-Line Physical Therapy</a></h2>
+          <p class="post-excerpt">Most physical therapy in New York is designed around what insurance will reimburse, not what produces the best clinical outcome. Here's what that costs you — and what one-on-one care actually looks like.</p>
+          <a href="/blog/assembly-line-pt" class="post-read-link" aria-label="Read: The Case Against Assembly-Line PT">Read</a>
+        </div>
+      </article>
+
+    </div><!-- /posts-grid static -->
+
+    <!-- AUTOMATED POSTS — loaded from posts.json via Make pipeline -->
+    <div id="auto-posts-section" style="display:none;margin-top:2px;">
+      <div class="posts-grid" id="auto-posts-grid"></div>
+    </div>
+
+  </section>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"Caliber PT Insights","url":"https://insights.caliberpt.co","description":"Clinical perspectives on orthopedic recovery and performance from Caliber PT, Manhattan's concierge physical therapy practice.","publisher":{"@type":"Organization","name":"Caliber PT PLLC","url":"https://caliberpt.co"},"blogPost":[{"@type":"BlogPosting","headline":"Concierge Physical Therapy in Manhattan — What It Is and Who It's For","url":"https://insights.caliberpt.co/blog/concierge-pt-manhattan","datePublished":"2024-09-03"},{"@type":"BlogPosting","headline":"The True Cost of Insurance-Based Physical Therapy","url":"https://insights.caliberpt.co/blog/true-cost-of-insurance-pt","datePublished":"2024-07-30"},{"@type":"BlogPosting","headline":"How Professional Athletes Approach Injury Recovery","url":"https://insights.caliberpt.co/blog/how-athletes-recover","datePublished":"2024-06-18"},{"@type":"BlogPosting","headline":"What Top NYC Surgeons Look for in a Physical Therapist","url":"https://insights.caliberpt.co/blog/what-surgeons-expect","datePublished":"2024-05-20"},{"@type":"BlogPosting","headline":"The Case Against Assembly-Line Physical Therapy","url":"https://insights.caliberpt.co/blog/assembly-line-pt","datePublished":"2024-04-15"}]}</script>
+
+</main>
+
+<section class="article-cta" aria-label="Call to action">
+  <div class="article-cta-inner">
+    <span class="eyebrow">Work With Our Team</span>
+    <h2>Ready to get<br><em>back to full function?</em></h2>
+    <p>One-on-one sessions with a Doctor of Physical Therapy, delivered to your home, office, or preferred Manhattan gym. No waiting rooms. No shared time slots. No exceptions.</p>
+    <div class="cta-btn-group">
+      <a href="https://caliberpt.co/#/contact" class="btn-gold">Reserve Your Consultation</a>
+      <a href="https://caliberpt.co/#/services" class="btn-cream">Explore Services</a>
+    </div>
+    <p class="cta-contact-line">Or call us directly: <a href="tel:6466687210">646.668.7210</a></p>
+  </div>
+</section>
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><img src="caliber_logo.svg" alt="Caliber PT" style="height:40px;width:auto;display:block;margin-bottom:12px;"></div>
+      <p class="footer-tagline">Concierge orthopedic physical therapy. Manhattan, NYC.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col"><span class="footer-col-label">Practice</span>
+        <ul role="list">
+          <li><a href="https://caliberpt.co/#/about">Our Story</a></li>
+          <li><a href="https://caliberpt.co/#/services">Services</a></li>
+          <li><a href="https://caliberpt.co/#/faq">FAQ</a></li>
+          <li><a href="https://insights.caliberpt.co">Insights</a></li>
+        </ul>
+      </div>
+      <div class="footer-col"><span class="footer-col-label">Contact</span>
+        <ul role="list">
+          <li><a href="https://caliberpt.co/#/contact">Reserve Consultation</a></li>
+          <li><a href="tel:6466687210">646.668.7210</a></li>
+          <li><a href="mailto:hello@caliberpt.co">hello@caliberpt.co</a></li>
+        </ul>
+      </div>
+      <div class="footer-col"><span class="footer-col-label">Legal</span>
+        <ul role="list"><li><a href="https://caliberpt.co/#/privacy">Privacy Policy</a></li></ul>
       </div>
     </div>
-  </nav>
+  </div>
+  <div class="footer-inner footer-bottom">
+    <p>© 2026 Caliber PT PLLC — All rights reserved.</p>
+    <p>Sessions start at $270 · Manhattan, New York City</p>
+  </div>
+</footer>
 
-  <!-- HEADER -->
-  <header style="background: var(--black); border-bottom: 1px solid rgba(240,234,224,0.06);">
-    <div class="page-header">
-      <span class="eyebrow">Insights</span>
-      <div class="gold-line"></div>
-      <h1 class="page-title">
-        Clinical perspectives.<br />
-        <em>Straight from the source.</em>
-      </h1>
-      <p class="page-subtitle">
-        Expert takes on surgical recovery, performance, injury prevention,
-        and what evidence-based physical therapy actually looks like.
-      </p>
-    </div>
-  </header>
+<script>
+// Load automated posts from posts.json (Make pipeline output)
+(async () => {
+  try {
+    const r = await fetch('./posts.json?v=' + Date.now());
+    if (!r.ok) return;
+    const posts = await r.json();
+    if (!posts || !posts.length) return;
+    const sorted = [...posts].sort((a,b) => b.publishTime - a.publishTime);
+    const grid = document.getElementById('auto-posts-grid');
+    const section = document.getElementById('auto-posts-section');
+    sorted.forEach((p, i) => {
+      const d = new Date(typeof p.publishTime === 'number' && p.publishTime < 1e12 ? p.publishTime * 1000 : p.publishTime);
+      const date = d.toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'});
+      const dateISO = d.toISOString().split('T')[0];
+      grid.innerHTML += `
+        <article class="post-card fade-up" style="transition-delay:${i * 0.1}s">
+          <div class="post-content">
+            <div class="post-card-meta">
+              <span class="post-category">Insights</span>
+              <span class="post-meta-dot" aria-hidden="true"></span>
+              <time class="post-date" datetime="${dateISO}">${date}</time>
+            </div>
+            <h2><a href="./posts/${p.slug}.html">${p.title}</a></h2>
+            <p class="post-excerpt">${p.excerpt || ''}</p>
+            <a href="./posts/${p.slug}.html" class="post-read-link">Read</a>
+          </div>
+        </article>`;
+    });
+    section.style.display = 'block';
+    // Re-trigger fade-up for new cards
+    section.querySelectorAll('.fade-up').forEach(el => {
+      new IntersectionObserver(([e]) => { if(e.isIntersecting) el.classList.add('visible'); }, {threshold:.1}).observe(el);
+    });
+  } catch(e) { /* posts.json not present yet — fine */ }
+})();
+</script>
 
-  <!-- POSTS -->
-  <main id="main-content">
-    <section class="posts-section" aria-label="Blog posts">
-      <div id="posts-container">
-        <div class="state-msg">
-          <span class="font-display">Loading</span>
-          <p>Retrieving posts…</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div>
-        <div class="footer-logo">
-          <img src="https://quiet-sundae-38ce4e.netlify.app/caliber_logo.svg" alt="Caliber PT" />
-        </div>
-        <p class="footer-desc">Manhattan's premier concierge orthopedic physical therapy practice.</p>
-      </div>
-      <div>
-        <span class="footer-label">Navigate</span>
-        <div class="footer-links">
-          <a href="https://caliberpt.co">Main Site</a>
-          <a href="https://caliberpt.co/#/about">About</a>
-          <a href="https://caliberpt.co/#/services">Services</a>
-          <a href="https://caliberpt.co/#/faq">FAQ</a>
-          <a href="https://caliberpt.co/#/contact">Get Started</a>
-        </div>
-      </div>
-      <div>
-        <span class="footer-label">Contact</span>
-        <div class="footer-links">
-          <a href="tel:+16466687210">646.668.7210</a>
-          <a href="mailto:hello@caliberpt.co">hello@caliberpt.co</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© <span id="yr"></span> Caliber PT PLLC. All rights reserved.</p>
-      <a href="https://caliberpt.co/#/privacy">Privacy Policy</a>
-    </div>
-  </footer>
-
-  <script>
-    // Set year
-    document.getElementById('yr').textContent = new Date().getFullYear();
-
-    // Format Unix timestamp to readable date
-    function formatDate(ts) {
-      const d = new Date(typeof ts === 'number' && ts < 1e12 ? ts * 1000 : ts);
-      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    }
-
-    // Render posts
-    async function loadPosts() {
-      const container = document.getElementById('posts-container');
-      try {
-        const res = await fetch('./posts.json?v=' + Date.now());
-        if (!res.ok) throw new Error('not found');
-        const posts = await res.json();
-
-        if (!posts || posts.length === 0) {
-          container.innerHTML = `
-            <div class="state-msg">
-              <span class="font-display">Coming soon.</span>
-              <p>Our first posts are on the way.</p>
-            </div>`;
-          return;
-        }
-
-        // Sort newest first
-        const sorted = [...posts].sort((a, b) => b.publishTime - a.publishTime);
-
-        container.innerHTML = `<div class="posts-grid">` +
-          sorted.map(p => `
-            <a href="./posts/${p.slug}.html" class="post-card">
-              <span class="post-date">${formatDate(p.publishTime)}</span>
-              <h2 class="post-title">${p.title}</h2>
-              <p class="post-excerpt">${p.excerpt || ''}</p>
-              <span class="post-arrow" aria-hidden="true">→</span>
-            </a>
-          `).join('') +
-        `</div>`;
-      } catch {
-        container.innerHTML = `
-          <div class="state-msg">
-            <span class="font-display">Coming soon.</span>
-            <p>Our first posts are on the way.</p>
-          </div>`;
-      }
-    }
-
-    loadPosts();
-  </script>
 </body>
 </html>
