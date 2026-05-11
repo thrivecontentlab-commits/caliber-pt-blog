@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://insights.caliberpt.co/sitemap.xml

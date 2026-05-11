@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{POST_TITLE}} — Caliber PT Insights</title>
+  <meta name="description" content="{{SEO_DESCRIPTION}}" />
+  <meta property="og:title" content="{{POST_TITLE}} — Caliber PT" />
+  <meta property="og:description" content="{{SEO_DESCRIPTION}}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://insights.caliberpt.co/posts/{{POST_SLUG}}.html" />
+  <meta name="article:published_time" content="{{PUBLISH_DATE_ISO}}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:    #0A0A0A;
+      --surface:  #141414;
+      --surface2: #1C1C1C;
+      --cream:    #F0EAE0;
+      --cream-65: rgba(240,234,224,0.65);
+      --cream-45: rgba(240,234,224,0.45);
+      --gold:     #B8936A;
+      --gold-lt:  #D4AC82;
+      --border:   rgba(240,234,224,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--black); scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--cream-65);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 6px; background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: rgba(184,147,106,0.3); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 80px; display: flex; align-items: center;
+      background: rgba(10,10,10,0.97);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .navbar-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 40px;
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo img { height: 52px; width: auto; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-link {
+      font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(240,234,224,0.6); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--cream); }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--gold); text-decoration: none;
+      transition: gap 0.2s ease;
+    }
+    .nav-back:hover { gap: 14px; }
+    .nav-cta {
+      font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+      border: 1px solid var(--gold); padding: 10px 22px; text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--black); }
+
+    /* ── ARTICLE HEADER ── */
+    .article-header {
+      padding: 140px 40px 60px;
+      border-bottom: 1px solid rgba(240,234,224,0.06);
+      background: var(--surface);
+    }
+    .article-header-inner { max-width: 760px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold);
+      display: block; margin-bottom: 16px;
+    }
+    .gold-line { height: 1px; width: 48px; background: var(--gold); margin-bottom: 32px; }
+    .article-date {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(240,234,224,0.45); margin-bottom: 24px;
+    }
+    .article-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 300; line-height: 1.1; color: var(--cream);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── ARTICLE BODY ── */
+    .article-body {
+      max-width: 760px; margin: 0 auto;
+      padding: 64px 40px 100px;
+    }
+
+    /* Style all QuickCreator-generated HTML content */
+    .article-body h1, .article-body h2, .article-body h3,
+    .article-body h4, .article-body h5, .article-body h6 {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-weight: 400 !important; color: var(--cream) !important;
+      line-height: 1.2 !important; margin-top: 48px !important; margin-bottom: 18px !important;
+    }
+    .article-body h2 { font-size: clamp(22px, 2.5vw, 30px) !important; }
+    .article-body h3 { font-size: clamp(18px, 2vw, 24px) !important; }
+    .article-body h4 { font-size: 18px !important; }
+
+    .article-body p {
+      font-family: 'Jost', sans-serif !important;
+      font-size: 15px !important; line-height: 1.9 !important;
+      font-weight: 300 !important; color: var(--cream-65) !important;
+      margin-bottom: 20px !important;
+    }
+
+    .article-body ul, .article-body ol {
+      padding-left: 24px !important; margin-bottom: 24px !important;
+    }
+    .article-body li {
+      font-size: 15px !important; line-height: 1.8 !important;
+      font-weight: 300 !important; color: var(--cream-65) !important;
+      margin-bottom: 8px !important;
+    }
+
+    .article-body strong, .article-body b { color: var(--cream) !important; font-weight: 500 !important; }
+    .article-body em, .article-body i { font-style: italic !important; }
+
+    .article-body a {
+      color: var(--gold) !important; text-decoration: none !important;
+      transition: color 0.2s !important;
+    }
+    .article-body a:hover { color: var(--gold-lt) !important; }
+
+    .article-body blockquote {
+      background: rgba(184,147,106,0.06) !important;
+      border-left: 2px solid var(--gold) !important;
+      border-top: none !important; border-right: none !important; border-bottom: none !important;
+      padding: 24px 28px !important; margin: 36px 0 !important;
+      border-radius: 0 !important;
+    }
+    .article-body blockquote p {
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: clamp(17px, 1.8vw, 21px) !important;
+      font-style: italic !important; color: rgba(240,234,224,0.85) !important;
+      font-weight: 300 !important; line-height: 1.6 !important;
+      margin-bottom: 0 !important;
+    }
+
+    .article-body hr {
+      border: none !important;
+      border-top: 1px solid var(--border) !important;
+      margin: 44px 0 !important;
+    }
+
+    .article-body img {
+      max-width: 100% !important; height: auto !important;
+      border-radius: 0 !important; display: block !important;
+      margin: 32px 0 !important;
+      filter: brightness(0.92) !important;
+    }
+
+    .article-body table {
+      width: 100% !important; border-collapse: collapse !important; margin-bottom: 28px !important;
+    }
+    .article-body th, .article-body td {
+      padding: 12px 16px !important;
+      border: 1px solid rgba(240,234,224,0.1) !important;
+      font-size: 13px !important; font-weight: 300 !important; color: var(--cream-65) !important;
+      text-align: left !important;
+    }
+    .article-body th { color: var(--cream) !important; font-weight: 500 !important; }
+
+    .article-body code {
+      background: var(--surface2) !important; color: var(--gold-lt) !important;
+      padding: 2px 6px !important; font-size: 13px !important;
+      border: 1px solid var(--border) !important; border-radius: 0 !important;
+    }
+    .article-body pre {
+      background: var(--surface2) !important; border: 1px solid var(--border) !important;
+      padding: 18px !important; overflow-x: auto !important; margin-bottom: 24px !important;
+    }
+
+    /* ── CTA STRIP ── */
+    .article-cta {
+      background: rgba(184,147,106,0.06);
+      border-top: 1px solid rgba(184,147,106,0.15);
+      border-bottom: 1px solid rgba(184,147,106,0.15);
+      padding: 60px 40px; text-align: center;
+    }
+    .article-cta-inner { max-width: 520px; margin: 0 auto; }
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 3vw, 38px); font-weight: 300; color: var(--cream);
+      margin-bottom: 16px;
+    }
+    .cta-body {
+      font-size: 14px; line-height: 1.8; font-weight: 300;
+      color: var(--cream-65); margin-bottom: 32px;
+    }
+    .btn-gold {
+      display: inline-block; padding: 14px 36px;
+      border: 1px solid var(--gold); color: var(--gold);
+      font-family: 'Jost', sans-serif; font-size: 11px;
+      font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.3s ease;
+    }
+    .btn-gold:hover { background: var(--gold); color: var(--black); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 60px 0 40px; }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 40px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 40px; margin-bottom: 48px;
+    }
+    .footer-logo img { height: 44px; width: auto; margin-bottom: 16px; }
+    .footer-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      color: rgba(240,234,224,0.45); text-decoration: none;
+      font-size: 13px; font-weight: 300; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-desc { color: rgba(240,234,224,0.4); font-size: 13px; line-height: 1.8; font-weight: 300; }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto; padding: 24px 40px 0;
+      border-top: 1px solid rgba(240,234,224,0.06);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p, .footer-bottom a {
+      color: rgba(240,234,224,0.3); font-size: 11px; font-weight: 300; text-decoration: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .article-header { padding: 110px 24px 48px; }
+      .article-body { padding: 48px 24px 80px; }
+      .article-cta { padding: 48px 24px; }
+      .footer-inner { padding: 0 24px; }
+      .footer-bottom { padding: 24px 24px 0; }
+    }
+
+    a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="https://caliberpt.co" class="nav-logo" aria-label="Caliber PT — Home">
+        <img src="../caliber_logo.svg" alt="Caliber PT" />
+      </a>
+      <div class="nav-links">
+        <a href="../index.html" class="nav-back">← All Posts</a>
+        <a href="https://caliberpt.co/#/about" class="nav-link">About</a>
+        <a href="https://caliberpt.co/#/services" class="nav-link">Services</a>
+        <a href="https://caliberpt.co/#/contact" class="nav-cta">Reserve Consultation</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ARTICLE HEADER -->
+  <header class="article-header">
+    <div class="article-header-inner">
+      <span class="eyebrow">Insights</span>
+      <div class="gold-line"></div>
+      <p class="article-date">{{PUBLISH_DATE}}</p>
+      <h1 class="article-title">{{POST_TITLE}}</h1>
+    </div>
+  </header>
+
+  <!-- ARTICLE BODY -->
+  <main id="main-content">
+    <article class="article-body" aria-label="Article content">
+      {{POST_CONTENT}}
+    </article>
+
+    <!-- CTA -->
+    <div class="article-cta">
+      <div class="article-cta-inner">
+        <h2 class="cta-title">Ready to work with our team?</h2>
+        <p class="cta-body">
+          Sessions start at $270. One-on-one, in Manhattan, on your schedule.
+          Leave your details and we'll reach out to connect.
+        </p>
+        <a href="https://caliberpt.co/#/contact" class="btn-gold">Reserve Your Consultation</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">
+          <img src="../caliber_logo.svg" alt="Caliber PT" />
+        </div>
+        <p class="footer-desc">Manhattan's premier concierge orthopedic physical therapy practice.</p>
+      </div>
+      <div>
+        <span class="footer-label">Navigate</span>
+        <div class="footer-links">
+          <a href="https://caliberpt.co">Main Site</a>
+          <a href="../index.html">All Posts</a>
+          <a href="https://caliberpt.co/#/services">Services</a>
+          <a href="https://caliberpt.co/#/contact">Get Started</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-label">Contact</span>
+        <div class="footer-links">
+          <a href="tel:+16466687210">646.668.7210</a>
+          <a href="mailto:hello@caliberpt.co">hello@caliberpt.co</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="yr"></span> Caliber PT PLLC. All rights reserved.</p>
+      <a href="https://caliberpt.co/#/privacy">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>
