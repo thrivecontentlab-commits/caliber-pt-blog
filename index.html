@@ -29,13 +29,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="/_astro/_slug_.BFA1s-Ub.css">
-  <script>
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>{window.scrollY>40?nav?.classList.add('scrolled'):nav?.classList.remove('scrolled')},{passive:true});
-const toggle=document.getElementById('nav-toggle'),links=document.getElementById('nav-links');
-toggle?.addEventListener('click',()=>{const o=links?.classList.toggle('open');toggle.setAttribute('aria-expanded',String(o))});
-document.querySelectorAll('.fade-up').forEach(el=>{new IntersectionObserver(([e])=>{if(e.isIntersecting){el.classList.add('visible')}},{threshold:.1,rootMargin:'0px 0px -40px 0px'}).observe(el)});
-</script>
+
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to content</a>
@@ -243,5 +237,42 @@ document.querySelectorAll('.fade-up').forEach(el=>{new IntersectionObserver(([e]
 })();
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Nav scroll
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 40) { nav && nav.classList.add('scrolled'); }
+    else { nav && nav.classList.remove('scrolled'); }
+  }, { passive: true });
+
+  // Mobile nav toggle
+  var toggle = document.getElementById('nav-toggle');
+  var links = document.getElementById('nav-links');
+  if (toggle) {
+    toggle.addEventListener('click', function() {
+      var isOpen = links && links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
+
+  // Fade-up on scroll — runs AFTER DOM exists so cards are found
+  var fadeEls = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    fadeEls.forEach(function(el) { observer.observe(el); });
+  } else {
+    // Fallback for older browsers
+    fadeEls.forEach(function(el) { el.classList.add('visible'); });
+  }
+});
+</script>
 </body>
 </html>
